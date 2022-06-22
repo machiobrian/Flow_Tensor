@@ -1,9 +1,10 @@
 #change the directory to run from the virtual environment of the conda_tfv
 import tensorflow as tf
-#from tensorflow import keras
+#from tensorflow import keras -> not needed anymore since keras is a standalone
 import matplotlib.pyplot as plt #create figures and add different images on the figures
 import numpy as np
 #from tensorflow.keras.layers import Conv2D, Input, Dense, Maxpool2D, BatchNormalization, Flatten, GlobalAveragePool2D
+from keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, Flatten, GlobalAveragePooling2D
 
 def display_some_examples(examples, labels):
     #randomly choose some images from the data sets and them inside the figure
@@ -42,7 +43,5 @@ if __name__=="__main__":
     #labels
 
 
-    display_some_examples(x_test, y_train) #call the function and pass it the parameters
-
-
-    pass
+    display_some_examples(x_test, y_test) #call the function and pass it the parameters
+    
