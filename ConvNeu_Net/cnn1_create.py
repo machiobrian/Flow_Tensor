@@ -58,7 +58,8 @@ train_path = '/home/machio_b/Documents/Dog_Cats/train/train'
 test_path = '/home/machio_b/Documents/Dog_Cats/train/test'
 valid_path = '/home/machio_b/Documents/Dog_Cats/train/valid'
     
-#generate batches of image tensor data from the respective directories
+#generate batches of image tensor data from the respective directories - returns 
+# a directory iterator -> an infinitely repeating
 
 train_batches = ImageDataGenerator(preprocessing_function=app.vgg16.preprocess_input)\
     .flow_from_directory(directory=train_path, target_size=(244,244), classes=['cat', 'dog'], 
@@ -82,15 +83,15 @@ img, labels = next(train_batches) #generate a batch of images and labels from th
 
 #plot the processed images
 
-def plotImages(images_arr):
-    fig, axes = plt.subplots(1,10, figsize=(20,20))
-    axes = axes.flatten()
+# def plotImages(images_arr):
+#     fig, axes = plt.subplots(1,10, figsize=(20,20))
+#     axes = axes.flatten()
 
-    for img, ax in zip(images_arr, axes):
-        ax.imshow(img)
-        ax.axis('off')
-    plt.tight_layout()
-    plt.show()
+#     for img, ax in zip(images_arr, axes):
+#         ax.imshow(img)
+#         ax.axis('off')
+#     plt.tight_layout()
+#     plt.show()
 
-plotImages(img)
-print(labels)
+# plotImages(img)
+# print(labels)
