@@ -9,12 +9,12 @@ from keras.optimizers import Adam
 
 model = Sequential([
     Conv2D(filters=32, kernel_size=(3,3), activation='relu', padding='same',
-    input_shape=(224,224,3)),
-    MaxPool2D(pool_size=(2,2), strides=2),
+    input_shape=(120,120,3)),
+    MaxPool2D(pool_size=(2,2), strides=2), #cut by half
     Conv2D(filters=64, kernel_size=(3,3), activation='relu', padding='same'),
     MaxPool2D(pool_size=(2,2), strides=2),
-    Flatten(),
-    Dense(units=2, activation='softmax')
+    Flatten(), #to 1 dimensional
+    Dense(units=2, activation='softmax') #sftmax -> gives probability of 
 ])
 
 #first layer ->  2 dimensional convolution layer, with 32 output filters of kernel
@@ -42,6 +42,8 @@ model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentro
 #     Flatten(),
 #     Dense(units=1, activation='sigmoid')
 # ])
+
+
 
 #model2.summary()
 

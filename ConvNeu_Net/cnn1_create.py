@@ -34,17 +34,17 @@ if os.path.isdir('train/dog') is False: #check to see if dir is already in place
     os.makedirs('test/dog')
     os.makedirs('test/cat')
 #from the 25000 photos all random, we move just a small random number to the directories
-    for i in random.sample(glob.glob('cat*'), 500): #1000 samples into the train set
+    for i in random.sample(glob.glob('cat*'), 200): #1000 samples into the train set
         shutil.move(i, 'train/cat')
-    for i in random.sample(glob.glob('dog*'), 500):
+    for i in random.sample(glob.glob('dog*'), 200):
         shutil.move(i, 'train/dog')
-    for i in random.sample(glob.glob('cat*'), 100): #200 samples into the valid set
+    for i in random.sample(glob.glob('cat*'), 70): #200 samples into the valid set
         shutil.move(i, 'valid/cat')
-    for i in random.sample(glob.glob('dog*'), 100):
+    for i in random.sample(glob.glob('dog*'), 70):
         shutil.move(i, 'valid/dog')
-    for i in random.sample(glob.glob('cat*'), 50): #100 samples into the test set
+    for i in random.sample(glob.glob('cat*'), 15): #100 samples into the test set
         shutil.move(i, 'test/cat')
-    for i in random.sample(glob.glob('dog*'), 50):
+    for i in random.sample(glob.glob('dog*'), 15):
         shutil.move(i, 'test/dog')      #the remaining amount of data remains in the directory
         #the data remaining data can be deleted at will
 
@@ -62,10 +62,10 @@ valid_path = '/home/machio_b/Documents/Dog_Cats/train/valid'
 # a directory iterator -> an infinitely repeating
 
 train_batches = ImageDataGenerator(preprocessing_function=app.vgg16.preprocess_input)\
-    .flow_from_directory(directory=train_path, target_size=(244,244), classes=['cat', 'dog'], 
+    .flow_from_directory(directory=train_path, target_size=(120,120), classes=['cat', 'dog'], 
     batch_size=10)
 valid_batches = ImageDataGenerator(preprocessing_function=app.vgg16.preprocess_input)\
-    .flow_from_directory(directory=valid_path, target_size=(244,244), classes=['cat', 'dog'],
+    .flow_from_directory(directory=valid_path, target_size=(120,120), classes=['cat', 'dog'],
     batch_size=10)
 test_batches = ImageDataGenerator(preprocessing_function=app.vgg16.preprocess_input)\
     .flow_from_directory(directory=test_path, target_size=(244,244), classes=['cat', 'dog'],
