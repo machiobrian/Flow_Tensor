@@ -25,7 +25,8 @@ mobile = tf.keras.applications.mobilenet.MobileNet()
 #required by the model
 
 def prepare_image(file):
-    img_path = '/MobileNet-samples/'
+    #img_path = '/home/machio_b/Documents/Flow_Tensor/ConvNeu_Net/MobileNet-samples/'
+    img_path = './ConvNeu_Net/MobileNet-samples/'
     img = tf.keras.utils.load_img(img_path + file, target_size=(224, 224))
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array_expanded_dims = np.expand_dims(img_array, axis=0)
