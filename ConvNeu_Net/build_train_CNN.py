@@ -1,10 +1,11 @@
-from cnn1_create import train_batches, valid_batches
+from cnn1_create import train_batches, valid_batches, test_batches
 import tensorflow as tf
 import keras
 from keras.activations import relu, softmax
 from keras.models import Sequential #one input/output tensor
 from keras.layers import (Dense, MaxPool2D, Conv2D, Flatten)
 from keras.optimizers import Adam
+import numpy as np
 
 
 model = Sequential([
@@ -61,7 +62,5 @@ model.fit(x=train_batches,
 #steps_per_epoch -> how many batches of samples should be passed to the model 
 # before declaring one epoch complete -> we have 1000, train samples, batch size of 10 
 # therefore the steps are 100
-
-# changes batch size to 5 in cnn1_create.py
 
 
