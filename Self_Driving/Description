@@ -1,1 +1,9 @@
 See how it can be configured for driving and controlling the meccanum wheels -> we train the bot using meccanum wheels
+
+
+Behaviour Cloning - The programmer performes the action and then the AI learns how to perfome the action too
+
+Human drives Around
+
+AI -> learns how the human was driving the robot around, abstractify the features and tries to understand why the
+human  is driving as they are
