@@ -4,7 +4,7 @@ import cv2 as cv #used to capture image with the respective camera
 from PIL import Image, ImageEnhance, ImageOps #used to process image data
 from keras.layers import Dense, Flatten, Conv2D, MaxPool2D #layers in the neural net
 from keras.models import Sequential, model_from_json #json -> file saving from tf
-from keras.optimizers import Adam
+from keras.optimizers import Adam #AI learns using the Adams Optimizer
 import tensorflow as tf
 
 import blynklib
@@ -43,13 +43,15 @@ class Agent:
             Conv2D(64,(4,4),(1,1),'same', activation='same'),
             MaxPool2D((4,4),strides=(2,2), padding='valid'),
             Conv2D(128,(4,4),strides=(1,1),activation='relu',padding='same'),
-            MaxPool2D(pool_size=(5,5),strides=(3,3), padding=('valid')),
+            MaxPool2D(pool_size=(5,5),strides=(3,3), padding=('valid')), #no activation function, 
+                                        # this is where we try to predict the steering angles
             Flatten(),
 
             Dense(384, activation='relu'),
             Dense(64, activation='relu',name='layer1'),
             Dense(8,activation='relu',name='layer2'),
-            Dense(1,activation='linear',name='layer3')
+
+            Dense(1,activation='linear',name='layer3')  
         ])
 
         self.model.compile(loss='mean_squared_error', optimizer=Adam(learning_rate=0.05))
@@ -66,7 +68,7 @@ class Agent:
 
     def act(self, state): #the method for the AI behaving in autonomous mode
         state = np.reshape(state, (1,240,320,3))
-        action = self.model.predict(state[0][0])
+        action = self.model.predict(state[0][0]) #this is where prediction is made
         action = (action * 2) - 1
         servoControl(action)
         return action
@@ -74,6 +76,7 @@ class Agent:
     """This is where the AI's Neural net Improves/ learns"""
     def learn(self, state, action):
         state = np.reshape(state, (1,240,320,3))
+        #learns human actons using the .fit
         history = self.model.fit(state, [action], batch_size=1,epochs=1,verbose=0)
         print("Loss: ", history.history.get("loss")[0])
 
@@ -109,8 +112,8 @@ while True:
 
     if agent.aiMode == False: #if the AI learning mode is off
         start  = start.time()
-        state = agent.getState()
-        action = agent.observeAction()
+        state = agent.getState() #state -> Input image
+        action = agent.observeAction() #human action
         counter += 1
 
         if counter % 1 == 0: #AI learns every iteration, can be changed for the AI not to learn every iteration
