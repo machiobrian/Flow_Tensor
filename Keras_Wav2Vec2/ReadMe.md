@@ -62,3 +62,9 @@ Attention_mask -> Allows us to send a batch into the transformer even with exxmp
 Dropout is a technique where randomly selected neurons are ignored during training
 
         - attention_mask = batch_size * max_seq_len
+
+# Building and Compiling the Module
+
+Since its a classification task:
+- Sparse Categorical X-entropy is what we use to train the model
+- Evaluate the model on an Accuracy Metric
